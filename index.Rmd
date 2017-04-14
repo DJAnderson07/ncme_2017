@@ -1,0 +1,372 @@
+---
+title       : Visualizing Effect Sizes Across the Full Distribution
+subtitle    : Daniel Anderson,  Joseph Stevens,  Joseph Nese 
+author      : Univeristy of Oregon
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : hemisu-light      # 
+widgets     : [mathjax]            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+--- .quote
+<style>
+em {
+  font-style: italic
+}
+</style>
+
+<style>
+strong {
+  font-weight: bold;
+}
+</style>
+
+
+```{r setup, include = FALSE}
+library(knitr)
+opts_knit$set(root.dir = "/Users/Daniel/CTL/Conferences/NCME/ESvis/conference/slides/")
+```
+## Background
+* Effect sizes generally defined by standardized mean differences
+    + Cohen's *d*
+    + Hedges' *g*
+* Particularly in non-experimental settings, interest may lie at other locations of the scale
+    + Achievement gaps at proficiency cut scores on statewide tests
+* Depending on the shape of each distribution, magnitude of group differences may depend upon scale location
+
+---- &twocol
+## Cohen's *d* & Hedges' *g*
+
+<br>
+<br>
+<br>
+<br>
+
+*** =left
+
+$$d = \frac{\bar{X}_{foc} - \bar{X}_{ref}}
+        {\sqrt{\frac{(n_{foc} - 1)Var_{foc} + (n_{ref} - 1)Var_{ref}}
+                  {n_{foc} + n_{ref} - 2}}}$$
+
+*** =right
+
+$$g = d\Big(1 - \frac{3}{4(n_{foc} + n_{ref}) - 9}\Big)$$
+
+---- &twocol
+## Percentage above the cut effect sizes
+
+*** =left
+# Percentage Above the Cut
+$$d^{pac} = PAC_{ref} - PAC_{foc}$$
+* Highly dependent on scale location
+
+*** =right
+# Transformed Percentage Above the Cut
+$$d^{tpac} = \Phi^{-1}(PAC_{ref}) - \Phi^{-1}(PAC_{foc})$$
+* Assumes both distributions are normally distributed with equal variance
+
+---- &twocol
+## Probability-Probability Plots
+
+```{r load_data, echo = FALSE}
+load("/Users/Daniel/BRT/Manuscripts/Dissertation/TeacherSchoolEffects/Analysis/g3Test.Rda")
+d <- g3[ ,c(4, 3, 9, 12:14, 22, 25, 27)]
+names(d) <- tolower(gsub("g3", "", names(d)))
+d <- d[order(d$sid), ]
+
+d$ellpgmcd <- ifelse(d$ellpgmcd == 1, "Active", ifelse(
+                d$ellpgmcd == 3 | d$ellpgmcd == 2, "Monitor", "Non-ELL"))
+d$sped <- ifelse(d$sped == 1, "Sped", "Non-Sped")
+d$frl <- ifelse(d$frl == 1, "FRL", "Non-FRL")
+d$occasion <- gsub("g3", "", d$occasion)
+
+d$eth <- with(d, 
+    ifelse(eth == "American Indian or Alaskan Native", "Am. Indian", ifelse(
+      eth == "Black or African American", "Black", ifelse(
+      eth == "Native American", "Native Am.", eth))))
+
+d <- subset(d, eth != "Native Hawaiian or Other Pacific Islander")
+
+d$occasion <- c("Fall", "Winter", "Spring")[match(d$occasion, 
+                                              c("f", "w", "s"))]
+d$cohort <- as.numeric(d$cohort)
+
+names(d)[c(3:4, 6:9)] <- c("sped", "ethnicity", "ell", 
+    "season", "reading", "math")
+```
+
+*** =left
+
+```{r ecdf1, echo = FALSE, fig.height = 8}
+library(esvis)
+
+ecdf_plot(math ~ sped, d, legend = "base")
+abline(v = 190, col = "gray40")
+segments(x0 = 100, x1 = 190, y0 = 0.29, y1 = 0.29, 
+	col = col_hue(2)[1], 
+	lwd = 2, 
+	lty = 2)
+segments(x0 = 100, x1 = 190, y0 = 0.65, y1 = 0.65, 
+	col = col_hue(2)[2], 
+	lwd = 2, 
+	lty = 2)
+text(160, 0.32, "0.29", col = col_hue(2)[1], cex = 2)
+text(160, 0.68, "0.65", col = col_hue(2)[2], cex = 2)
+text(194, 0.02, "190", col = "gray40")
+
+text(228, 0.45, 
+	expression(d^{pac} == (1 - 0.29) - (1 - 0.65)), 
+	col = "gray40",
+	cex = 1.2)
+text(213, 0.38, 
+	expression(d^{pac} == 0.36),
+	col = "gray40",
+	cex = 1.2)
+```
+
+*** =right
+
+```{r pp_plot1, echo = FALSE, fig.height = 8}
+pp_plot(math ~ sped, d, text = FALSE, shade = FALSE, col = col_hue(3)[3])
+segments(x0 = 0.29, x1 = 0.29, y0 = -1, y1 = 0.65,
+	col = col_hue(2)[1], 
+	lwd = 2, 
+	lty = 2)
+segments(x0 = -1, x1 = 0.29, y0 = 0.65, y1 = 0.65,
+	col = col_hue(2)[2], 
+	lwd = 2, 
+	lty = 2)
+text(0.37, 0.02, "0.29", col = col_hue(2)[1], cex = 2)
+text(0.05, 0.68, "0.65", col = col_hue(2)[2], cex = 2)
+```
+
+----
+## Area Under the PP Curve
+
+```{r auc, echo = FALSE, fig.height = 8, fig.width = 13}
+pp_plot(math ~ sped, d, text = FALSE)
+text(0.6, 0.2, 
+	paste0("AUC = ", round(auc(math ~ sped, d, "Non-Sped", FALSE), 2)),
+	cex = 2,
+	col = "gray40")
+```
+
+----
+## Putting AUC in SD units 
+<span style="color:gray">Ho and colleagues</span>
+<br>
+
+$$V = \sqrt{2}\Phi^{-1}(AUC)$$ 
+
+* Scale invariant
+* Assumes respective normality
+	+ Normal with respect to each other under a shared transformation 
+
+
+
+<br>
+
+* *AUC* and *V* make fewer assumptions about the data, but are nonetheless summary measures.
+* May miss nuances in the data that can be picked up by visualizations - particularly if the magnitude of the effect depends on scale location.
+
+---- .segue
+# Implementation in `esvis`
+
+
+---- &twocol
+## R package actively in development
+
+*** =left
+
+* Install using the *devtools* package
+
+```{r eval = FALSE}
+install.packages("devtools")
+library(devtools) 
+install_github("DJAnderson07/esvis")
+```
+
+* Release to CRAN planned for summer
+* Has many useful features currently
+
+<br>
+
+See current development at 
+
+https://github.com/DJAnderson07/esvis
+
+*** =right
+![esvis](./assets/img/esvis.png)
+
+----
+## Example data
+
+I have stored a dataset in an object called `d`. Below are the first six rows of these data.
+
+```{r show_data, echo = FALSE}
+head(d)
+```
+
+
+
+----
+## Standard argument structure
+* All functions in *esvis* take a common argument structure, as follows
+
+```{r eval = FALSE}
+fun_name(outcome ~ group, data, additional_optional_args)
+```
+
+---- &twocol
+## PP Plots
+
+*** =left
+
+* Examine math differences by free or reduced lunch status
+
+```{r frl_pp_plot_echo, eval = FALSE}
+pp_plot(math ~ frl, d)
+```
+
+* Notice shading by default when only two groups are compared.
+* *AUC* and *V* annotated to the plot, by default
+* Plot is fully customizable with calls to base plotting functions (e.g., `main`, `col`, etc.)
+
+*** =right
+
+```{r frl_pp_plot_eval, echo = FALSE, fig.height = 8, fig.width = 7}
+pp_plot(math ~ frl, d)
+```
+
+----
+## More than one group?
+* Highest performing group selected by default
+
+```{r pp_plot_eth, fig.width = 10, fig.height = 6}
+pp_plot(reading ~ ethnicity, d)
+```
+
+----
+## Change reference group
+* Investigate differences by ELL Classification
+
+```{r pp_plot_ell, fig.width = 10, fig.height = 6}
+pp_plot(reading ~ ell, d, ref_group = "Non-ELL")
+```
+
+----
+## ECDFs
+* Produced equivalently
+
+```{r ecdf_ell1, fig.width = 10, fig.height = 6}
+ecdf_plot(reading ~ ell, d)
+```
+
+----
+## Cut-point?
+
+```{r ecdf_ell2, fig.width = 10, fig.height = 7}
+ecdf_plot(reading ~ ell, d, ref_cut = c(190, 200, 207))
+```
+
+----
+## Add horizontal reference lines
+
+```{r ecdf_ell3, fig.width = 10, fig.height = 7}
+ecdf_plot(reading ~ ell, d, ref_cut = c(190, 200, 207), hor_ref = TRUE)
+```
+
+----
+## Binned ES Plot
+
+* Split each distribution into arbitrary (even) quantile bins
+* Calculate mean difference within each bin
+* Divide by overall pooled standard deviation
+
+$$d_{[i]} = \frac{\bar{X}_{foc_{[i]}} - \bar{X}_{ref_{[i]}}}
+        {\sqrt{\frac{(n_{foc} - 1)Var_{foc} + (n_{ref} - 1)Var_{ref}}
+                  {n_{foc} + n_{ref} - 2}}}$$
+
+* In this case, essentially equivalent to Cohen's *d*, except that there are multiple mean differences (one for each bin)
+
+----
+## Ethnicity differences
+
+```{r binned_es_plot_eth1, fig.width = 10, fig.height = 7}
+binned_plot(math ~ ethnicity, d)
+```
+
+----
+## Change binning
+Quintile binning
+
+```{r binned_es_plot_eth2, fig.width = 10, fig.height = 6}
+binned_plot(math ~ ethnicity, d, qtiles = seq(0, 1, .2))
+```
+
+----
+## Change reference group
+
+```{r binned_es_plot_eth3, fig.width = 10, fig.height = 7}
+binned_plot(math ~ ethnicity, d, ref_group = "Black", qtiles = seq(0, 1, .2))
+```
+
+---- &twocol
+## Themes (last note on plots)
+* Currently standard and dark themes implemented
+
+*** =left
+
+```{r theme_standard, fig.height = 6}
+binned_plot(math ~ ethnicity, d)
+```
+
+*** =right
+
+```{r theme_dark, fig.height = 6}
+binned_plot(math ~ ethnicity, d, theme = "dark")
+```
+
+----
+# Estimation (quickly)
+`esvis` will also calculate a number of effect sizes using the same argument structure, including:
+* Cohen's *d*
+* Hedges' *g*
+* *AUC*
+* *V*
+* *PAC* with **any set** of cut scores
+* *TPAC* with **one** cut score (currently)
+
+By default, effect sizes are produced for all possible pairwise comparisons, but reference groups can be selected as well.
+
+---- &twocol
+
+*** =left
+
+```{r coh_d}
+coh_d(math ~ ethnicity, d)
+```
+
+*** =right
+
+```{r coh_d_ref}
+coh_d(math ~ ethnicity, d, "White")
+```
+
+----
+```{r pac}
+pac(math ~ ethnicity, d, cut = c(190, 200, 207), ref_group = "White")
+```
+
+----
+## Summary and future developments
+* Visualizing group differences across the full scale, or at particular points of the scale, is important for interpretation and communication.
+* `esvis` provides a simple interface to produce powerful visualizations
+
+# Future development
+* Interactions with `:`
+* Interactions via panel plotting
+* Others?
+
+---- .segue
+# Thanks!

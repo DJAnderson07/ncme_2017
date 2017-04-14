@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Visualizing Effect Sizes Across the Full Distribution</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Visualizing Effect Sizes Across the Full Distribution">
+  <meta name="author" content="Univeristy of Oregon">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/hemisu-light.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Visualizing Effect Sizes Across the Full Distribution</h1>
+    <h2>Daniel Anderson,  Joseph Stevens,  Joseph Nese</h2>
+    <p>Univeristy of Oregon<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="quote" id="slide-1" style="background:;">
+  <article data-timings="">
+    <style>
+em {
+  font-style: italic
+}
+</style>
+
+<style>
+strong {
+  font-weight: bold;
+}
+</style>
+
+<h2>Background</h2>
+
+<ul>
+<li>Effect sizes generally defined by standardized mean differences
+
+<ul>
+<li>Cohen&#39;s <em>d</em></li>
+<li>Hedges&#39; <em>g</em></li>
+</ul></li>
+<li>Particularly in non-experimental settings, interest may lie at other locations of the scale
+
+<ul>
+<li>Achievement gaps at proficiency cut scores on statewide tests</li>
+</ul></li>
+<li>Depending on the shape of each distribution, magnitude of group differences may depend upon scale location</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Cohen&#39;s <em>d</em> &amp; Hedges&#39; <em>g</em></h2>
+  </hgroup>
+  <article data-timings="">
+    <p><br>
+<br>
+<br>
+<br></p>
+
+<div style='float:left;width:48%;'>
+  <p>\[d = \frac{\bar{X}_{foc} - \bar{X}_{ref}}
+        {\sqrt{\frac{(n_{foc} - 1)Var_{foc} + (n_{ref} - 1)Var_{ref}}
+                  {n_{foc} + n_{ref} - 2}}}\]</p>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p>\[g = d\Big(1 - \frac{3}{4(n_{foc} + n_{ref}) - 9}\Big)\]</p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Percentage above the cut effect sizes</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;'>
+  <h1>Percentage Above the Cut</h1>
+
+<p>\[d^{pac} = PAC_{ref} - PAC_{foc}\]</p>
+
+<ul>
+<li>Highly dependent on scale location</li>
+</ul>
+
+</div>
+<div style='float:right;width:48%;'>
+  <h1>Transformed Percentage Above the Cut</h1>
+
+<p>\[d^{tpac} = \Phi^{-1}(PAC_{ref}) - \Phi^{-1}(PAC_{foc})\]</p>
+
+<ul>
+<li>Assumes both distributions are normally distributed with equal variance</li>
+</ul>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Probability-Probability Plots</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;'>
+  <p><img src="assets/fig/ecdf1-1.png" alt="plot of chunk ecdf1"></p>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p><img src="assets/fig/pp_plot1-1.png" alt="plot of chunk pp_plot1"></p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>Area Under the PP Curve</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="assets/fig/auc-1.png" alt="plot of chunk auc"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-6" style="background:;">
+  <hgroup>
+    <h2>Putting AUC in SD units</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><span style="color:gray">Ho and colleagues</span>
+<br></p>
+
+<p>\[V = \sqrt{2}\Phi^{-1}(AUC)\] </p>
+
+<ul>
+<li>Scale invariant</li>
+<li>Assumes respective normality
+
+<ul>
+<li>Normal with respect to each other under a shared transformation </li>
+</ul></li>
+</ul>
+
+<p><br></p>
+
+<ul>
+<li><em>AUC</em> and <em>V</em> make fewer assumptions about the data, but are nonetheless summary measures.</li>
+<li>May miss nuances in the data that can be picked up by visualizations - particularly if the magnitude of the effect depends on scale location.</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="segue" id="slide-7" style="background:;">
+  <hgroup>
+    <h1>Implementation in <code>esvis</code></h1>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-8" style="background:;">
+  <hgroup>
+    <h2>R package actively in development</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;'>
+  <ul>
+<li>Install using the <em>devtools</em> package</li>
+</ul>
+
+<pre><code class="r">install.packages(&quot;devtools&quot;)
+library(devtools) 
+install_github(&quot;DJAnderson07/esvis&quot;)
+</code></pre>
+
+<ul>
+<li>Release to CRAN planned for summer</li>
+<li>Has many useful features currently</li>
+</ul>
+
+<p><br></p>
+
+<p>See current development at </p>
+
+<p><a href="https://github.com/DJAnderson07/esvis">https://github.com/DJAnderson07/esvis</a></p>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p><img src="./assets/img/esvis.png" alt="esvis"></p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-9" style="background:;">
+  <hgroup>
+    <h2>Example data</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>I have stored a dataset in an object called <code>d</code>. Below are the first six rows of these data.</p>
+
+<pre><code>##         sid cohort     sped  ethnicity frl     ell season reading math
+## 2873 332347      1 Non-Sped   Hispanic FRL  Active Spring     167  192
+## 162  400047      1 Non-Sped Native Am. FRL Non-ELL Spring     191  191
+## 355  400047      1 Non-Sped Native Am. FRL Non-ELL   Fall     183  182
+## 387  400047      1 Non-Sped Native Am. FRL Non-ELL Winter     178  179
+## 230  400277      1 Non-Sped Native Am. FRL Non-ELL Winter     199  197
+## 648  400277      1 Non-Sped Native Am. FRL Non-ELL   Fall     203  196
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-10" style="background:;">
+  <hgroup>
+    <h2>Standard argument structure</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>All functions in <em>esvis</em> take a common argument structure, as follows</li>
+</ul>
+
+<pre><code class="r">fun_name(outcome ~ group, data, additional_optional_args)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-11" style="background:;">
+  <hgroup>
+    <h2>PP Plots</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;'>
+  <ul>
+<li>Examine math differences by free or reduced lunch status</li>
+</ul>
+
+<pre><code class="r">pp_plot(math ~ frl, d)
+</code></pre>
+
+<ul>
+<li>Notice shading by default when only two groups are compared.</li>
+<li><em>AUC</em> and <em>V</em> annotated to the plot, by default</li>
+<li>Plot is fully customizable with calls to base plotting functions (e.g., <code>main</code>, <code>col</code>, etc.)</li>
+</ul>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p><img src="assets/fig/frl_pp_plot_eval-1.png" alt="plot of chunk frl_pp_plot_eval"></p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-12" style="background:;">
+  <hgroup>
+    <h2>More than one group?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Highest performing group selected by default</li>
+</ul>
+
+<pre><code class="r">pp_plot(reading ~ ethnicity, d)
+</code></pre>
+
+<p><img src="assets/fig/pp_plot_eth-1.png" alt="plot of chunk pp_plot_eth"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-13" style="background:;">
+  <hgroup>
+    <h2>Change reference group</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Investigate differences by ELL Classification</li>
+</ul>
+
+<pre><code class="r">pp_plot(reading ~ ell, d, ref_group = &quot;Non-ELL&quot;)
+</code></pre>
+
+<p><img src="assets/fig/pp_plot_ell-1.png" alt="plot of chunk pp_plot_ell"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-14" style="background:;">
+  <hgroup>
+    <h2>ECDFs</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Produced equivalently</li>
+</ul>
+
+<pre><code class="r">ecdf_plot(reading ~ ell, d)
+</code></pre>
+
+<p><img src="assets/fig/ecdf_ell1-1.png" alt="plot of chunk ecdf_ell1"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-15" style="background:;">
+  <hgroup>
+    <h2>Cut-point?</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">ecdf_plot(reading ~ ell, d, ref_cut = c(190, 200, 207))
+</code></pre>
+
+<p><img src="assets/fig/ecdf_ell2-1.png" alt="plot of chunk ecdf_ell2"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-16" style="background:;">
+  <hgroup>
+    <h2>Add horizontal reference lines</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">ecdf_plot(reading ~ ell, d, ref_cut = c(190, 200, 207), hor_ref = TRUE)
+</code></pre>
+
+<p><img src="assets/fig/ecdf_ell3-1.png" alt="plot of chunk ecdf_ell3"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-17" style="background:;">
+  <hgroup>
+    <h2>Binned ES Plot</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Split each distribution into arbitrary (even) quantile bins</li>
+<li>Calculate mean difference within each bin</li>
+<li>Divide by overall pooled standard deviation</li>
+</ul>
+
+<p>\[d_{[i]} = \frac{\bar{X}_{foc_{[i]}} - \bar{X}_{ref_{[i]}}}
+        {\sqrt{\frac{(n_{foc} - 1)Var_{foc} + (n_{ref} - 1)Var_{ref}}
+                  {n_{foc} + n_{ref} - 2}}}\]</p>
+
+<ul>
+<li>In this case, essentially equivalent to Cohen&#39;s <em>d</em>, except that there are multiple mean differences (one for each bin)</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-18" style="background:;">
+  <hgroup>
+    <h2>Ethnicity differences</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">binned_plot(math ~ ethnicity, d)
+</code></pre>
+
+<p><img src="assets/fig/binned_es_plot_eth1-1.png" alt="plot of chunk binned_es_plot_eth1"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-19" style="background:;">
+  <hgroup>
+    <h2>Change binning</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Quintile binning</p>
+
+<pre><code class="r">binned_plot(math ~ ethnicity, d, qtiles = seq(0, 1, .2))
+</code></pre>
+
+<p><img src="assets/fig/binned_es_plot_eth2-1.png" alt="plot of chunk binned_es_plot_eth2"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-20" style="background:;">
+  <hgroup>
+    <h2>Change reference group</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">binned_plot(math ~ ethnicity, d, ref_group = &quot;Black&quot;, qtiles = seq(0, 1, .2))
+</code></pre>
+
+<p><img src="assets/fig/binned_es_plot_eth3-1.png" alt="plot of chunk binned_es_plot_eth3"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-21" style="background:;">
+  <hgroup>
+    <h2>Themes (last note on plots)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Currently standard and dark themes implemented</li>
+</ul>
+
+<div style='float:left;width:48%;'>
+  <pre><code class="r">binned_plot(math ~ ethnicity, d)
+</code></pre>
+
+<p><img src="assets/fig/theme_standard-1.png" alt="plot of chunk theme_standard"></p>
+
+</div>
+<div style='float:right;width:48%;'>
+  <pre><code class="r">binned_plot(math ~ ethnicity, d, theme = &quot;dark&quot;)
+</code></pre>
+
+<p><img src="assets/fig/theme_dark-1.png" alt="plot of chunk theme_dark"></p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-22" style="background:;">
+  <hgroup>
+    <h1>Estimation (quickly)</h1>
+  </hgroup>
+  <article data-timings="">
+    <p><code>esvis</code> will also calculate a number of effect sizes using the same argument structure, including:</p>
+
+<ul>
+<li>Cohen&#39;s <em>d</em></li>
+<li>Hedges&#39; <em>g</em></li>
+<li><em>AUC</em></li>
+<li><em>V</em></li>
+<li><em>PAC</em> with <strong>any set</strong> of cut scores</li>
+<li><em>TPAC</em> with <strong>one</strong> cut score (currently)</li>
+</ul>
+
+<p>By default, effect sizes are produced for all possible pairwise comparisons, but reference groups can be selected as well.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-23" style="background:;">
+  <article data-timings="">
+    
+<div style='float:left;width:48%;'>
+  <pre><code class="r">coh_d(math ~ ethnicity, d)
+</code></pre>
+
+<pre><code>##      ref_group   foc_group    estimate
+## 1        White       Asian  0.10689571
+## 2        White Two or More  0.30281232
+## 3        White    Hispanic  1.03147010
+## 4        White       Black  0.72127040
+## 5        White  Am. Indian  0.76483392
+## 6        White  Native Am.  0.84185433
+## 7        Asian Two or More  0.07471180
+## 8        Asian    Hispanic  0.72590767
+## 9        Asian       Black  0.39210777
+## 10       Asian  Am. Indian  0.29878405
+## 11       Asian  Native Am.  0.39455423
+## 12 Two or More    Hispanic  0.40811606
+## 13 Two or More       Black  0.21475724
+## 14 Two or More  Am. Indian  0.16297587
+## 15 Two or More  Native Am.  0.24174797
+## 16    Hispanic       Black  0.02423883
+## 17    Hispanic  Am. Indian  0.25579261
+## 18    Hispanic  Native Am.  0.30800593
+## 19       Black  Am. Indian  0.12256685
+## 20       Black  Native Am.  0.15962973
+## 21  Am. Indian  Native Am.  0.01700166
+## 22  Native Am.  Am. Indian -0.01700166
+## 23  Native Am.       Black -0.15962973
+## 24  Native Am.    Hispanic -0.30800593
+## 25  Native Am. Two or More -0.24174797
+## 26  Native Am.       Asian -0.39455423
+## 27  Native Am.       White -0.84185433
+## 28  Am. Indian       Black -0.12256685
+## 29  Am. Indian    Hispanic -0.25579261
+## 30  Am. Indian Two or More -0.16297587
+## 31  Am. Indian       Asian -0.29878405
+## 32  Am. Indian       White -0.76483392
+## 33       Black    Hispanic -0.02423883
+## 34       Black Two or More -0.21475724
+## 35       Black       Asian -0.39210777
+## 36       Black       White -0.72127040
+## 37    Hispanic Two or More -0.40811606
+## 38    Hispanic       Asian -0.72590767
+## 39    Hispanic       White -1.03147010
+## 40 Two or More       Asian -0.07471180
+## 41 Two or More       White -0.30281232
+## 42       Asian       White -0.10689571
+</code></pre>
+
+</div>
+<div style='float:right;width:48%;'>
+  <pre><code class="r">coh_d(math ~ ethnicity, d, &quot;White&quot;)
+</code></pre>
+
+<pre><code>##   ref_group   foc_group  estimate
+## 1     White       Asian 0.1068957
+## 2     White Two or More 0.3028123
+## 3     White    Hispanic 1.0314701
+## 4     White       Black 0.7212704
+## 5     White  Am. Indian 0.7648339
+## 6     White  Native Am. 0.8418543
+</code></pre>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-24" style="background:;">
+  <article data-timings="">
+    <pre><code class="r">pac(math ~ ethnicity, d, cut = c(190, 200, 207), ref_group = &quot;White&quot;)
+</code></pre>
+
+<pre><code>##    ref_group   foc_group cut    estimate
+## 1      White       Asian 190 0.091192628
+## 2      White Two or More 190 0.105914547
+## 3      White    Hispanic 190 0.204674477
+## 4      White       Black 190 0.194817998
+## 5      White  Am. Indian 190 0.281166804
+## 6      White  Native Am. 190 0.293704535
+## 22     White       Asian 200 0.067726906
+## 23     White Two or More 200 0.138174016
+## 24     White    Hispanic 200 0.265801628
+## 25     White       Black 200 0.258117222
+## 26     White  Am. Indian 200 0.262496905
+## 27     White  Native Am. 200 0.328528106
+## 43     White       Asian 207 0.006063335
+## 44     White Two or More 207 0.085670751
+## 45     White    Hispanic 207 0.183788361
+## 46     White       Black 207 0.182983988
+## 47     White  Am. Indian 207 0.180997357
+## 48     White  Native Am. 207 0.241836807
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-25" style="background:;">
+  <hgroup>
+    <h2>Summary and future developments</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Visualizing group differences across the full scale, or at particular points of the scale, is important for interpretation and communication.</li>
+<li><code>esvis</code> provides a simple interface to produce powerful visualizations</li>
+</ul>
+
+<h1>Future development</h1>
+
+<ul>
+<li>Interactions with <code>:</code></li>
+<li>Interactions via panel plotting</li>
+<li>Others?</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="segue" id="slide-26" style="background:;">
+  <hgroup>
+    <h1>Thanks!</h1>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='NA'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Cohen&#39;s <em>d</em> &amp; Hedges&#39; <em>g</em>'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Percentage above the cut effect sizes'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Probability-Probability Plots'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='Area Under the PP Curve'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='Putting AUC in SD units'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='Implementation in <code>esvis</code>'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='R package actively in development'>
+         8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='Example data'>
+         9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='Standard argument structure'>
+         10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='PP Plots'>
+         11
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title='More than one group?'>
+         12
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=13 title='Change reference group'>
+         13
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=14 title='ECDFs'>
+         14
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=15 title='Cut-point?'>
+         15
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=16 title='Add horizontal reference lines'>
+         16
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=17 title='Binned ES Plot'>
+         17
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=18 title='Ethnicity differences'>
+         18
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=19 title='Change binning'>
+         19
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=20 title='Change reference group'>
+         20
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=21 title='Themes (last note on plots)'>
+         21
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=22 title='Estimation (quickly)'>
+         22
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=23 title='NA'>
+         23
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=24 title='NA'>
+         24
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=25 title='Summary and future developments'>
+         25
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=26 title='Thanks!'>
+         26
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
