@@ -370,3 +370,5 @@ pac(math ~ ethnicity, d, cut = c(190, 200, 207), ref_group = "White")
 
 ---- .segue
 # Thanks!
+
+Slides available at: https://djanderson07.github.io/ncme_2017/
