@@ -81,7 +81,7 @@ d$frl <- ifelse(d$frl == 1, "FRL", "Non-FRL")
 d$occasion <- gsub("g3", "", d$occasion)
 
 d$eth <- with(d, 
-    ifelse(eth == "American Indian or Alaskan Native", "Am. Indian", ifelse(
+    ifelse(eth == "American Indian or Alaskan Native", "AK Native", ifelse(
       eth == "Black or African American", "Black", ifelse(
       eth == "Native American", "Native Am.", eth))))
 
@@ -246,11 +246,30 @@ pp_plot(math ~ frl, d)
 pp_plot(reading ~ ethnicity, d)
 ```
 
-----
-## Change reference group
-* Investigate differences by ELL Classification
+---- &twocol
+## Investigating ELL differences
+* Three groups: Non, Active, Monitor
+* Same syntax for estimates
 
-```{r pp_plot_ell, fig.width = 10, fig.height = 6}
+*** =left
+Default output
+
+```{r ell_es1}
+coh_d(reading ~ ell, d)
+```
+
+*** =right
+Or choose a reference group
+
+```{r ell_es2}
+auc(reading ~ ell, d, 
+		ref_group = "Non-ELL")
+```
+
+----
+# Visualization provides more nuance
+
+```{r pp_plot_ell, fig.width = 13, fig.height = 7.5}
 pp_plot(reading ~ ell, d, ref_group = "Non-ELL")
 ```
 
@@ -258,21 +277,21 @@ pp_plot(reading ~ ell, d, ref_group = "Non-ELL")
 ## ECDFs
 * Produced equivalently
 
-```{r ecdf_ell1, fig.width = 10, fig.height = 6}
+```{r ecdf_ell1, fig.width = 13, fig.height = 6}
 ecdf_plot(reading ~ ell, d)
 ```
 
 ----
 ## Cut-point?
 
-```{r ecdf_ell2, fig.width = 10, fig.height = 7}
+```{r ecdf_ell2, fig.width = 13, fig.height = 7}
 ecdf_plot(reading ~ ell, d, ref_cut = c(190, 200, 207))
 ```
 
 ----
 ## Add horizontal reference lines
 
-```{r ecdf_ell3, fig.width = 10, fig.height = 7}
+```{r ecdf_ell3, fig.width = 13, fig.height = 7}
 ecdf_plot(reading ~ ell, d, ref_cut = c(190, 200, 207), hor_ref = TRUE)
 ```
 
@@ -311,24 +330,25 @@ binned_plot(math ~ ethnicity, d, qtiles = seq(0, 1, .2))
 binned_plot(math ~ ethnicity, d, ref_group = "Black", qtiles = seq(0, 1, .2))
 ```
 
----- &twocol
-## Themes (last note on plots)
-* Currently standard and dark themes implemented
+---- &twocol bg:#363636
+## Theme dark
 
 *** =left
 
 ```{r theme_standard, fig.height = 6}
-binned_plot(math ~ ethnicity, d)
+pp_plot(math ~ ethnicity, d, 
+	theme = "dark")
 ```
 
 *** =right
 
 ```{r theme_dark, fig.height = 6}
-binned_plot(math ~ ethnicity, d, theme = "dark")
+binned_plot(math ~ ethnicity, d, 
+	theme = "dark")
 ```
 
 ----
-# Estimation (quickly)
+# Estimation 
 `esvis` will also calculate a number of effect sizes using the same argument structure, including:
 * Cohen's *d*
 * Hedges' *g*
@@ -338,25 +358,6 @@ binned_plot(math ~ ethnicity, d, theme = "dark")
 * *TPAC* with **one** cut score (currently)
 
 By default, effect sizes are produced for all possible pairwise comparisons, but reference groups can be selected as well.
-
----- &twocol
-
-*** =left
-
-```{r coh_d}
-coh_d(math ~ ethnicity, d)
-```
-
-*** =right
-
-```{r coh_d_ref}
-coh_d(math ~ ethnicity, d, "White")
-```
-
-----
-```{r pac}
-pac(math ~ ethnicity, d, cut = c(190, 200, 207), ref_group = "White")
-```
 
 ----
 ## Summary and future developments

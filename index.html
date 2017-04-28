@@ -319,14 +319,53 @@ install_github(&quot;DJAnderson07/esvis&quot;)
 
 <slide class="" id="slide-13" style="background:;">
   <hgroup>
-    <h2>Change reference group</h2>
+    <h2>Investigating ELL differences</h2>
   </hgroup>
   <article data-timings="">
     <ul>
-<li>Investigate differences by ELL Classification</li>
+<li>Three groups: Non, Active, Monitor</li>
+<li>Same syntax for estimates</li>
 </ul>
 
-<pre><code class="r">pp_plot(reading ~ ell, d, ref_group = &quot;Non-ELL&quot;)
+<div style='float:left;width:48%;'>
+  <p>Default output</p>
+
+<pre><code class="r">coh_d(reading ~ ell, d)
+</code></pre>
+
+<pre><code>##   ref_group foc_group    estimate
+## 1   Monitor   Non-ELL  0.05421767
+## 2   Monitor    Active  0.70109139
+## 3   Non-ELL    Active  0.95679846
+## 4    Active   Non-ELL -0.95679846
+## 5    Active   Monitor -0.70109139
+## 6   Non-ELL   Monitor -0.05421767
+</code></pre>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p>Or choose a reference group</p>
+
+<pre><code class="r">auc(reading ~ ell, d, 
+        ref_group = &quot;Non-ELL&quot;)
+</code></pre>
+
+<pre><code>##   ref_group foc_group  estimate
+## 3   Non-ELL    Active 0.7552992
+## 6   Non-ELL   Monitor 0.4965789
+</code></pre>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-14" style="background:;">
+  <hgroup>
+    <h1>Visualization provides more nuance</h1>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">pp_plot(reading ~ ell, d, ref_group = &quot;Non-ELL&quot;)
 </code></pre>
 
 <p><img src="assets/fig/pp_plot_ell-1.png" alt="plot of chunk pp_plot_ell"></p>
@@ -335,7 +374,7 @@ install_github(&quot;DJAnderson07/esvis&quot;)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-14" style="background:;">
+<slide class="" id="slide-15" style="background:;">
   <hgroup>
     <h2>ECDFs</h2>
   </hgroup>
@@ -353,7 +392,7 @@ install_github(&quot;DJAnderson07/esvis&quot;)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-15" style="background:;">
+<slide class="" id="slide-16" style="background:;">
   <hgroup>
     <h2>Cut-point?</h2>
   </hgroup>
@@ -367,7 +406,7 @@ install_github(&quot;DJAnderson07/esvis&quot;)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-16" style="background:;">
+<slide class="" id="slide-17" style="background:;">
   <hgroup>
     <h2>Add horizontal reference lines</h2>
   </hgroup>
@@ -381,7 +420,7 @@ install_github(&quot;DJAnderson07/esvis&quot;)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-17" style="background:;">
+<slide class="" id="slide-18" style="background:;">
   <hgroup>
     <h2>Binned ES Plot</h2>
   </hgroup>
@@ -404,7 +443,7 @@ install_github(&quot;DJAnderson07/esvis&quot;)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-18" style="background:;">
+<slide class="" id="slide-19" style="background:;">
   <hgroup>
     <h2>Ethnicity differences</h2>
   </hgroup>
@@ -418,7 +457,7 @@ install_github(&quot;DJAnderson07/esvis&quot;)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-19" style="background:;">
+<slide class="" id="slide-20" style="background:;">
   <hgroup>
     <h2>Change binning</h2>
   </hgroup>
@@ -434,7 +473,7 @@ install_github(&quot;DJAnderson07/esvis&quot;)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-20" style="background:;">
+<slide class="" id="slide-21" style="background:;">
   <hgroup>
     <h2>Change reference group</h2>
   </hgroup>
@@ -448,24 +487,23 @@ install_github(&quot;DJAnderson07/esvis&quot;)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-21" style="background:;">
+<slide class="" id="slide-22" style="background:#363636;">
   <hgroup>
-    <h2>Themes (last note on plots)</h2>
+    <h2>Theme dark</h2>
   </hgroup>
   <article data-timings="">
-    <ul>
-<li>Currently standard and dark themes implemented</li>
-</ul>
-
+    
 <div style='float:left;width:48%;'>
-  <pre><code class="r">binned_plot(math ~ ethnicity, d)
+  <pre><code class="r">pp_plot(math ~ ethnicity, d, 
+    theme = &quot;dark&quot;)
 </code></pre>
 
 <p><img src="assets/fig/theme_standard-1.png" alt="plot of chunk theme_standard"></p>
 
 </div>
 <div style='float:right;width:48%;'>
-  <pre><code class="r">binned_plot(math ~ ethnicity, d, theme = &quot;dark&quot;)
+  <pre><code class="r">binned_plot(math ~ ethnicity, d, 
+    theme = &quot;dark&quot;)
 </code></pre>
 
 <p><img src="assets/fig/theme_dark-1.png" alt="plot of chunk theme_dark"></p>
@@ -475,9 +513,9 @@ install_github(&quot;DJAnderson07/esvis&quot;)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-22" style="background:;">
+<slide class="" id="slide-23" style="background:;">
   <hgroup>
-    <h1>Estimation (quickly)</h1>
+    <h1>Estimation</h1>
   </hgroup>
   <article data-timings="">
     <p><code>esvis</code> will also calculate a number of effect sizes using the same argument structure, including:</p>
@@ -497,108 +535,7 @@ install_github(&quot;DJAnderson07/esvis&quot;)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-23" style="background:;">
-  <article data-timings="">
-    
-<div style='float:left;width:48%;'>
-  <pre><code class="r">coh_d(math ~ ethnicity, d)
-</code></pre>
-
-<pre><code>##      ref_group   foc_group    estimate
-## 1        White       Asian  0.10689571
-## 2        White Two or More  0.30281232
-## 3        White    Hispanic  1.03147010
-## 4        White       Black  0.72127040
-## 5        White  Am. Indian  0.76483392
-## 6        White  Native Am.  0.84185433
-## 7        Asian Two or More  0.07471180
-## 8        Asian    Hispanic  0.72590767
-## 9        Asian       Black  0.39210777
-## 10       Asian  Am. Indian  0.29878405
-## 11       Asian  Native Am.  0.39455423
-## 12 Two or More    Hispanic  0.40811606
-## 13 Two or More       Black  0.21475724
-## 14 Two or More  Am. Indian  0.16297587
-## 15 Two or More  Native Am.  0.24174797
-## 16    Hispanic       Black  0.02423883
-## 17    Hispanic  Am. Indian  0.25579261
-## 18    Hispanic  Native Am.  0.30800593
-## 19       Black  Am. Indian  0.12256685
-## 20       Black  Native Am.  0.15962973
-## 21  Am. Indian  Native Am.  0.01700166
-## 22  Native Am.  Am. Indian -0.01700166
-## 23  Native Am.       Black -0.15962973
-## 24  Native Am.    Hispanic -0.30800593
-## 25  Native Am. Two or More -0.24174797
-## 26  Native Am.       Asian -0.39455423
-## 27  Native Am.       White -0.84185433
-## 28  Am. Indian       Black -0.12256685
-## 29  Am. Indian    Hispanic -0.25579261
-## 30  Am. Indian Two or More -0.16297587
-## 31  Am. Indian       Asian -0.29878405
-## 32  Am. Indian       White -0.76483392
-## 33       Black    Hispanic -0.02423883
-## 34       Black Two or More -0.21475724
-## 35       Black       Asian -0.39210777
-## 36       Black       White -0.72127040
-## 37    Hispanic Two or More -0.40811606
-## 38    Hispanic       Asian -0.72590767
-## 39    Hispanic       White -1.03147010
-## 40 Two or More       Asian -0.07471180
-## 41 Two or More       White -0.30281232
-## 42       Asian       White -0.10689571
-</code></pre>
-
-</div>
-<div style='float:right;width:48%;'>
-  <pre><code class="r">coh_d(math ~ ethnicity, d, &quot;White&quot;)
-</code></pre>
-
-<pre><code>##   ref_group   foc_group  estimate
-## 1     White       Asian 0.1068957
-## 2     White Two or More 0.3028123
-## 3     White    Hispanic 1.0314701
-## 4     White       Black 0.7212704
-## 5     White  Am. Indian 0.7648339
-## 6     White  Native Am. 0.8418543
-</code></pre>
-
-</div>
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
 <slide class="" id="slide-24" style="background:;">
-  <article data-timings="">
-    <pre><code class="r">pac(math ~ ethnicity, d, cut = c(190, 200, 207), ref_group = &quot;White&quot;)
-</code></pre>
-
-<pre><code>##    ref_group   foc_group cut    estimate
-## 1      White       Asian 190 0.091192628
-## 2      White Two or More 190 0.105914547
-## 3      White    Hispanic 190 0.204674477
-## 4      White       Black 190 0.194817998
-## 5      White  Am. Indian 190 0.281166804
-## 6      White  Native Am. 190 0.293704535
-## 22     White       Asian 200 0.067726906
-## 23     White Two or More 200 0.138174016
-## 24     White    Hispanic 200 0.265801628
-## 25     White       Black 200 0.258117222
-## 26     White  Am. Indian 200 0.262496905
-## 27     White  Native Am. 200 0.328528106
-## 43     White       Asian 207 0.006063335
-## 44     White Two or More 207 0.085670751
-## 45     White    Hispanic 207 0.183788361
-## 46     White       Black 207 0.182983988
-## 47     White  Am. Indian 207 0.180997357
-## 48     White  Native Am. 207 0.241836807
-</code></pre>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-<slide class="" id="slide-25" style="background:;">
   <hgroup>
     <h2>Summary and future developments</h2>
   </hgroup>
@@ -620,7 +557,7 @@ install_github(&quot;DJAnderson07/esvis&quot;)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="segue" id="slide-26" style="background:;">
+<slide class="segue" id="slide-25" style="background:;">
   <hgroup>
     <h1>Thanks!</h1>
   </hgroup>
@@ -709,86 +646,80 @@ install_github(&quot;DJAnderson07/esvis&quot;)
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=13 title='Change reference group'>
+        data-slide=13 title='Investigating ELL differences'>
          13
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=14 title='ECDFs'>
+        data-slide=14 title='Visualization provides more nuance'>
          14
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=15 title='Cut-point?'>
+        data-slide=15 title='ECDFs'>
          15
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=16 title='Add horizontal reference lines'>
+        data-slide=16 title='Cut-point?'>
          16
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=17 title='Binned ES Plot'>
+        data-slide=17 title='Add horizontal reference lines'>
          17
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=18 title='Ethnicity differences'>
+        data-slide=18 title='Binned ES Plot'>
          18
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=19 title='Change binning'>
+        data-slide=19 title='Ethnicity differences'>
          19
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=20 title='Change reference group'>
+        data-slide=20 title='Change binning'>
          20
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=21 title='Themes (last note on plots)'>
+        data-slide=21 title='Change reference group'>
          21
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=22 title='Estimation (quickly)'>
+        data-slide=22 title='Theme dark'>
          22
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=23 title='NA'>
+        data-slide=23 title='Estimation'>
          23
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=24 title='NA'>
+        data-slide=24 title='Summary and future developments'>
          24
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=25 title='Summary and future developments'>
+        data-slide=25 title='Thanks!'>
          25
-      </a>
-    </li>
-    <li>
-      <a href="#" target="_self" rel='tooltip' 
-        data-slide=26 title='Thanks!'>
-         26
       </a>
     </li>
   </ul>
